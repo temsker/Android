@@ -11,15 +11,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText loginEmail;
     private EditText loginPassword;
-
+    public static final String EXTRA_MESSAGE = "com.tekapic.EMAIL";
+    public static boolean isProfileActivityCreatedBefore = false;
 
 
     private void openProfileActivity() {
         Intent intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, loginEmail.getText().toString());
         startActivity(intent);
     }
 
@@ -36,17 +41,17 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // 0 - username doesn't exist in database
+        // 0 - user doesn't exist in database
         if(resultFromServer.equals("0")) {
             makeAToast("Username doesn't exist.");
             return;
         }
-        //1 - username exists in database, wrong password
+        //1 - user exists in database, wrong password
         else if(resultFromServer.equals("1")) {
             makeAToast("Wrong password.");
             return;
         }
-        // 2 - username exists in database, the password is correct,
+        // 2 - user exists in database, the password is correct,
         // open profile activity
         else if(resultFromServer.equals("2"))  {
             openProfileActivity();
@@ -88,7 +93,8 @@ public class LoginActivity extends AppCompatActivity {
                 loginPassword.getText().toString());
 
 
-        new LoginUserIntoSystem(this, ConnectToServer.getSocket()).execute(login);
+        new LoginUserIntoSystem(this, ConnectToServer.getObjectOutputStream(),
+                ConnectToServer.getBufferedReader()).execute(login);
 
 
     }
@@ -163,19 +169,31 @@ public class LoginActivity extends AppCompatActivity {
         return cm.getActiveNetworkInfo() != null;
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        if(isProfileActivityCreatedBefore) {
+            //send string zero "0" as email to server to break the login loop.
+            new LogoutUserFromSystem(ConnectToServer.getDataOutputStream()).execute();
+
+            isProfileActivityCreatedBefore = false;
+
+        }
 
         loginEmail = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);
 
         if(ConnectToServer.getSocket() == null) {
             connectToServer();
-
         }
 
     }
+
+    //need to try sql injection.
+    //maybe to add check input email format.
+
 
 }

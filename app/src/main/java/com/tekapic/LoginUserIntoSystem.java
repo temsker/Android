@@ -4,9 +4,7 @@ import android.os.AsyncTask;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
-import java.net.Socket;
 
 /**
  * Created by LEV on 12/04/2018.
@@ -15,11 +13,14 @@ import java.net.Socket;
 public class LoginUserIntoSystem extends AsyncTask<Login,Void,String> {
 
     private LoginActivity loginActivity;
-    private Socket socket;
+    private ObjectOutputStream objectOutputStream = null; // send object to the server
+    private BufferedReader bufferedReader = null; // get string from the server
 
-    public LoginUserIntoSystem(LoginActivity loginActivit, Socket socket) {
+    public LoginUserIntoSystem(LoginActivity loginActivity, ObjectOutputStream objectOutputStream,
+                               BufferedReader bufferedReader) {
         this.loginActivity = loginActivity;
-        this.socket = socket;
+        this.objectOutputStream = objectOutputStream;
+        this.bufferedReader = bufferedReader;
     }
 
     @Override
@@ -28,20 +29,11 @@ public class LoginUserIntoSystem extends AsyncTask<Login,Void,String> {
         Login login = voids[0];
         String dataFromServer = null;
 
-
         try {
 
-            ObjectOutputStream outToServer =
-                    new ObjectOutputStream(socket.getOutputStream() );
+            objectOutputStream.writeObject(login);
 
-            BufferedReader inFromServer =
-                    new BufferedReader(new
-                            InputStreamReader(socket.getInputStream()));
-
-            outToServer.writeObject(login);
-
-            dataFromServer = inFromServer.readLine();
-
+            dataFromServer = bufferedReader.readLine();
 
 
         } catch (IOException e) {

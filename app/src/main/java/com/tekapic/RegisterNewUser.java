@@ -1,13 +1,10 @@
 package com.tekapic;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
-import java.net.Socket;
 
 /**
  * Created by LEV on 12/04/2018.
@@ -16,12 +13,15 @@ import java.net.Socket;
 public class RegisterNewUser extends AsyncTask<User,Void,String> {
 
 
-    private Socket socket;
-    RegistrationActivity registrationActivity;
+    private RegistrationActivity registrationActivity;
+    private ObjectOutputStream objectOutputStream = null; // send object to the server
+    private BufferedReader bufferedReader = null; // get string from the server
 
-    public RegisterNewUser(Socket socket, RegistrationActivity registrationActivity) {
-        this.socket = socket;
+    public RegisterNewUser(RegistrationActivity registrationActivity, ObjectOutputStream objectOutputStream,
+                           BufferedReader bufferedReader) {
         this.registrationActivity = registrationActivity;
+        this.objectOutputStream = objectOutputStream;
+        this.bufferedReader = bufferedReader;
     }
 
     @Override
@@ -31,17 +31,8 @@ public class RegisterNewUser extends AsyncTask<User,Void,String> {
         String dataFromServer = null;
         try {
 
-            ObjectOutputStream  outToServerObject =
-                    new ObjectOutputStream(socket.getOutputStream() );
-
-            BufferedReader inFromServer =
-                    new BufferedReader(new
-                            InputStreamReader(ConnectToServer.getSocket().getInputStream()));
-
-
-            outToServerObject.writeObject(user);
-            dataFromServer = inFromServer.readLine();
-
+            objectOutputStream.writeObject(user);
+            dataFromServer = bufferedReader.readLine();
 
 
         } catch (IOException e) {

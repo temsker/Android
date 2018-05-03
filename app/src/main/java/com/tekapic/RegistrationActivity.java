@@ -169,7 +169,8 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
         //send the data of the new user to the server for registration
-        new RegisterNewUser(ConnectToServer.getSocket(), this).execute(user);
+        new RegisterNewUser(this, ConnectToServer.getObjectOutputStream(),
+                ConnectToServer.getBufferedReader()).execute(user);
 
     }
 
@@ -229,71 +230,19 @@ public class RegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-//        if(ConnectToServer.getSocket() != null) {
-//            Thread myThread = new Thread(new MyServerThread());
-//            myThread.start();
-//        }
-
-
         mobileNumber = findViewById(R.id.mobile_number);
         email = findViewById(R.id.email);
         username = findViewById(R.id.username);
         fullName = findViewById(R.id.full_name);
         password = findViewById(R.id.password);
 
+
+
     }
 
 
 
-   // server listener
 
-    class MyServerThread implements Runnable {
-
-        Handler handler = new Handler();
-        String message = null;
-
-        @Override
-        public void run() {
-
-            try {
-
-                while (true) {
-
-                    BufferedReader inFromServer =
-                            new BufferedReader(new
-                                    InputStreamReader(ConnectToServer.getSocket().getInputStream()));
-
-                    message = inFromServer.readLine();
-                    if(message != null) {
-                        if(message.contains("3")) {
-                            message = "3";
-                        }
-                        Log.i("from server", message);
-
-                    }
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            checkRegistrationProcedure(message);
-                        }
-                    });
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-
-                }
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
 
 
 
