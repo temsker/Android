@@ -3,6 +3,7 @@ package com.tekapic;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,15 +17,32 @@ import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity {
 
+
+
     private EditText loginEmail;
     private EditText loginPassword;
     public static final String EXTRA_MESSAGE = "com.tekapic.EMAIL";
     public static boolean isProfileActivityCreatedBefore = false;
 
+    public static final String USERS = "users";
+    public static final String EMAIL ="email";
+    public static final String PASSWORD ="password";
+    private SharedPreferences.Editor editor;
+    private SharedPreferences prefs;
+
 
     private void openProfileActivity() {
         Intent intent = new Intent(this, ProfileActivity.class);
-        intent.putExtra(EXTRA_MESSAGE, loginEmail.getText().toString());
+
+        if(loginEmail.getText().toString().isEmpty()) {
+            String restoredEmail = prefs.getString(EMAIL, null);
+            intent.putExtra(EXTRA_MESSAGE, restoredEmail);
+
+        }
+        else {
+            intent.putExtra(EXTRA_MESSAGE, loginEmail.getText().toString());
+        }
+
         startActivity(intent);
     }
 
@@ -54,7 +72,16 @@ public class LoginActivity extends AppCompatActivity {
         // 2 - user exists in database, the password is correct,
         // open profile activity
         else if(resultFromServer.equals("2"))  {
+
+            if(!loginEmail.getText().toString().isEmpty()) {
+                editor.putString(EMAIL, loginEmail.getText().toString());
+                editor.putString(PASSWORD, loginPassword.getText().toString());
+
+                editor.commit();
+            }
+
             openProfileActivity();
+
         }
     }
 
@@ -175,7 +202,16 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //get
+        editor = getSharedPreferences(USERS, MODE_PRIVATE).edit();
+
+        //retrieve
+        prefs = getSharedPreferences(USERS, MODE_PRIVATE);
+
         if(isProfileActivityCreatedBefore) {
+
+            editor.putString(LoginActivity.EMAIL, null);
+            editor.commit();
             //send string zero "0" as email to server to break the login loop.
             new LogoutUserFromSystem(ConnectToServer.getDataOutputStream()).execute();
 
@@ -186,8 +222,24 @@ public class LoginActivity extends AppCompatActivity {
         loginEmail = findViewById(R.id.login_email);
         loginPassword = findViewById(R.id.login_password);
 
+
+
+
         if(ConnectToServer.getSocket() == null) {
             connectToServer();
+        }
+
+
+
+        String restoredEmail = prefs.getString(EMAIL, null);
+        String restoredPassword = prefs.getString(PASSWORD, null);
+
+        if (restoredEmail != null && restoredPassword != null) {
+            Login login = new Login(restoredEmail, restoredPassword);
+
+            new LoginUserIntoSystem(this, ConnectToServer.getObjectOutputStream(),
+                    ConnectToServer.getBufferedReader()).execute(login);
+
         }
 
     }

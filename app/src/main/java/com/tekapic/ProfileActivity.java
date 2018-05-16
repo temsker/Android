@@ -1,9 +1,12 @@
 package com.tekapic;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import static com.tekapic.LoginActivity.USERS;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -19,6 +22,18 @@ public class ProfileActivity extends AppCompatActivity {
      TextView fullName;
      TextView password;
 
+    private SharedPreferences.Editor editor;
+    private SharedPreferences prefs;
+
+    @Override
+    public void onBackPressed() {
+        new LogoutUserFromSystem(ConnectToServer.getDataOutputStream()).execute();
+
+        editor.putString(LoginActivity.EMAIL, null);
+        editor.commit();
+
+        super.onBackPressed();
+    }
 
     public void setUserData(User user) {
 
@@ -41,6 +56,11 @@ public class ProfileActivity extends AppCompatActivity {
         fullName = findViewById(R.id.txt_full_name);
         password = findViewById(R.id.txt_password);
 
+        //get
+        editor = getSharedPreferences(LoginActivity.USERS, MODE_PRIVATE).edit();
+
+        //retrieve
+        prefs = getSharedPreferences(LoginActivity.USERS, MODE_PRIVATE);
 
 
         LoginActivity.isProfileActivityCreatedBefore = true;
