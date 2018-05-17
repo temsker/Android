@@ -10,18 +10,18 @@ import java.io.ObjectInputStream;
  * Created by LEV on 03/05/2018.
  */
 
-public class GetDataFromServer extends AsyncTask<String,Void,User> {
+public class GetAccountDetailsFromServer extends AsyncTask<String,Void,User> {
 
     private ProfileActivity profileActivity;
     private static DataOutputStream dataOutputStream = null; // write string to the server
     private static ObjectInputStream objectInputStream = null; // read object from server
 
 
-    public GetDataFromServer(ProfileActivity profileActivity, DataOutputStream dataOutputStream,
-    ObjectInputStream objectInputStream ) {
+    public GetAccountDetailsFromServer(ProfileActivity profileActivity, DataOutputStream dataOutputStream,
+                                       ObjectInputStream objectInputStream ) {
         this.profileActivity = profileActivity;
-        GetDataFromServer.dataOutputStream = dataOutputStream;
-        GetDataFromServer.objectInputStream = objectInputStream;
+        GetAccountDetailsFromServer.dataOutputStream = dataOutputStream;
+        GetAccountDetailsFromServer.objectInputStream = objectInputStream;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class GetDataFromServer extends AsyncTask<String,Void,User> {
     protected void onPostExecute(User user) {
         super.onPostExecute(user);
 
-        profileActivity.setUserData(user);
+        profileActivity.getAccountDetails(user);
 
     }
 }

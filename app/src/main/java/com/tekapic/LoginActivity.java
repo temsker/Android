@@ -12,8 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -29,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     public static final String PASSWORD ="password";
     private SharedPreferences.Editor editor;
     private SharedPreferences prefs;
-
+    public static String email;
 
     private void openProfileActivity() {
         Intent intent = new Intent(this, ProfileActivity.class);
@@ -38,10 +37,16 @@ public class LoginActivity extends AppCompatActivity {
             String restoredEmail = prefs.getString(EMAIL, null);
             intent.putExtra(EXTRA_MESSAGE, restoredEmail);
 
+            email = restoredEmail;
+
+
         }
         else {
             intent.putExtra(EXTRA_MESSAGE, loginEmail.getText().toString());
+            email = loginEmail.getText().toString();
+
         }
+
 
         startActivity(intent);
     }
