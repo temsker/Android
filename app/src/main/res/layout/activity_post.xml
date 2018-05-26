@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.tekapic.PostActivity">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="post"
+        android:text="POST"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.042" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="344dp"
+        android:layout_height="370dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/checkBox_me"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Me" />
+
+            <CheckBox
+                android:id="@+id/checkBox_family"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Family" />
+
+            <CheckBox
+                android:id="@+id/checkBox_friends"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Friends" />
+
+            <CheckBox
+                android:id="@+id/checkBox_love"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Love" />
+
+            <CheckBox
+                android:id="@+id/checkBox_pets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pets" />
+
+            <CheckBox
+                android:id="@+id/checkBox_nature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nature" />
+
+            <CheckBox
+                android:id="@+id/checkBox_sport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sport" />
+
+            <CheckBox
+                android:id="@+id/checkBox_persons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Persons" />
+
+            <CheckBox
+                android:id="@+id/checkBox_animals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Animals" />
+
+            <CheckBox
+                android:id="@+id/checkBox_cars"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cars" />
+
+            <CheckBox
+                android:id="@+id/checkBox_views"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Views" />
+
+            <CheckBox
+                android:id="@+id/checkBox_food"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Food" />
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Select Albums:"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.183" />
+
+</android.support.constraint.ConstraintLayout>

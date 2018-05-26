@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class DetailsActivity extends AppCompatActivity {
+public class EditProfileActivity extends AppCompatActivity {
 
     private TextView mobileNumber;
     private TextView email;
@@ -27,7 +27,7 @@ public class DetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details);
+        setContentView(R.layout.activity_edit_profile);
 
         mobileNumber = findViewById(R.id.txt_mobile_number);
         email = findViewById(R.id.txt_email);

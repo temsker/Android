@@ -27,13 +27,13 @@ public class GetAccountDetailsFromServer extends AsyncTask<String,Void,User> {
     @Override
     protected User doInBackground(String... strings) {
 
-        String email = strings[0];
+        String string = strings[0];
         Object object;
         User user = new User();
 
 
         try {
-            dataOutputStream.writeBytes(email + '\n');
+            dataOutputStream.writeBytes(string + '\n');
             try {
                 object = objectInputStream.readObject();
 

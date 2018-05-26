@@ -217,8 +217,8 @@ public class LoginActivity extends AppCompatActivity {
 
             editor.putString(LoginActivity.EMAIL, null);
             editor.commit();
-            //send string zero "0" as email to server to break the login loop.
-            new LogoutUserFromSystem(ConnectToServer.getDataOutputStream()).execute();
+            //send string "logOut" to server to logout.
+            new SendStringToServer(ConnectToServer.getDataOutputStream()).execute("logOut");
 
             isProfileActivityCreatedBefore = false;
 

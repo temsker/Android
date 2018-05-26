@@ -9,19 +9,20 @@ import java.io.IOException;
  * Created by LEV on 03/05/2018.
  */
 
-public class LogoutUserFromSystem extends AsyncTask<Void,Void,Void> {
+public class SendStringToServer extends AsyncTask<String,Void,Void> {
 
     private static DataOutputStream dataOutputStream = null; // write string to the server
 
-    public LogoutUserFromSystem(DataOutputStream dataOutputStream) {
-        LogoutUserFromSystem.dataOutputStream = dataOutputStream;
+    public SendStringToServer(DataOutputStream dataOutputStream) {
+        SendStringToServer.dataOutputStream = dataOutputStream;
     }
 
     @Override
-    protected Void doInBackground(Void... voids) {
+    protected Void doInBackground(String... voids) {
+        String string = voids[0];
 
         try {
-            dataOutputStream.writeBytes("0" + '\n');
+            dataOutputStream.writeBytes(string + '\n');
         } catch (IOException e) {
             e.printStackTrace();
         }

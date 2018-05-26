@@ -1,13 +1,10 @@
 package com.tekapic;
 
-/**
- * Created by LEV on 12/04/2018.
- */
 import java.io.Serializable;
 
 public class User implements Serializable {
 
-//    private static final long serialVersionUID = 9178463713495656548L;
+    //    private static final long serialVersionUID = 9178463713495656548L;
     private String mobileNumber;
     private String email;
     private String username;
