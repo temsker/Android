@@ -1,7 +1,7 @@
 package com.tekapic;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+
 
 /**
  * Created by LEV on 23/05/2018.
@@ -9,27 +9,34 @@ import java.util.ArrayList;
 
 public class Picture implements Serializable {
 
-    private ArrayList<String> albums;
+    public static final int numberOfAlbums = 13;
+
+    private boolean albums[];
     private byte[] pictureInByteArray;
     private String date;
 
+
+
     public Picture() {
-        this.albums = new ArrayList<String>();
-        this.pictureInByteArray = null;
-        this.date = "none";
+        albums = new boolean[numberOfAlbums];
+        for(int i = 0; i < albums.length; i++) {
+            albums[i] = false;
+        }
+        pictureInByteArray = null; // neeed to initialize with some picture
+        date = "none";
     }
 
-    public Picture(ArrayList<String> albums, byte[] pictureInByteArray, String date) {
+    public Picture(boolean[] albums, byte[] pictureInByteArray, String date) {
         this.albums = albums;
         this.pictureInByteArray = pictureInByteArray;
         this.date = date;
     }
 
-    public ArrayList<String> getAlbums() {
+    public boolean[] getAlbums() {
         return albums;
     }
 
-    public void setAlbums(ArrayList<String> albums) {
+    public void setAlbums(boolean[] albums) {
         this.albums = albums;
     }
 

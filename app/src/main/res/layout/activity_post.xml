@@ -97,10 +97,10 @@
                 android:text="Animals" />
 
             <CheckBox
-                android:id="@+id/checkBox_cars"
+                android:id="@+id/checkBox_vehicles"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cars" />
+                android:text="Vehicles" />
 
             <CheckBox
                 android:id="@+id/checkBox_views"
@@ -113,6 +113,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Food" />
+
+            <CheckBox
+                android:id="@+id/checkBox_things"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Things" />
         </LinearLayout>
     </ScrollView>
 
