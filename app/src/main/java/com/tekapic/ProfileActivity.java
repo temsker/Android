@@ -20,6 +20,21 @@ public class ProfileActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.tekapic.ALBUMS";
 
 
+    public void showAlbums(View view) {
+
+    }
+
+
+    public void showAllPictures(View view) {
+        //save showAllPictures as a string in intent
+        //start intent PicturesActivity
+
+        Intent intent = new Intent(this, PicturesActivity.class);
+        intent.putExtra("show_all_pictures", "showAllPictures");
+        startActivity(intent);
+    }
+
+
     public void takeAPicture(View view) {
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

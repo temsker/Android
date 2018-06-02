@@ -11,10 +11,10 @@ import android.widget.Toast;
 public class PostActivity extends AppCompatActivity {
 
     CheckBox me, family, friends, love, pets, nature, sport;
-    CheckBox persons, animals, vehicles, views, food, things;
+    CheckBox persons, animals, vehicles, views, food, things, funny;
     byte[] pictureInByteArray;
     CheckBox[] checkBoxesArray = new CheckBox[Picture.numberOfAlbums];
-
+    boolean isButtonPostClicked;
 
 
     public void initialcheckBoxesArray() {
@@ -31,12 +31,19 @@ public class PostActivity extends AppCompatActivity {
         checkBoxesArray[10] = views;
         checkBoxesArray[11] = food;
         checkBoxesArray[12] = things;
+        checkBoxesArray[13] = funny;
     }
 
     public void post(View view) {
 
+        if(isButtonPostClicked) {
+            return;
+        }
+
+        isButtonPostClicked = true;
+
         boolean albums[] = new boolean[Picture.numberOfAlbums];
-        boolean userDidNotCheckAlbums = true;
+        boolean userDidNotSelectAnyAlbum = true;
 
         for(int i = 0; i < checkBoxesArray.length; i++) {
             if(checkBoxesArray[i].isChecked()) {
@@ -49,13 +56,13 @@ public class PostActivity extends AppCompatActivity {
 
         for(int i = 0; i < checkBoxesArray.length; i++) {
             if(checkBoxesArray[i].isChecked()) {
-                userDidNotCheckAlbums = false;
+                userDidNotSelectAnyAlbum = false;
                break;
             }
         }
 
         //If the user didn't check any album.
-        if(userDidNotCheckAlbums) {
+        if(userDidNotSelectAnyAlbum) {
             Toast.makeText(this, "Select at least one album.", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -86,6 +93,8 @@ public class PostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
+        isButtonPostClicked = false;
+
         me = findViewById(R.id.checkBox_me);
         family = findViewById(R.id.checkBox_family);
         friends = findViewById(R.id.checkBox_friends);
@@ -99,6 +108,7 @@ public class PostActivity extends AppCompatActivity {
         views = findViewById(R.id.checkBox_views);
         food = findViewById(R.id.checkBox_food);
         things = findViewById(R.id.checkBox_things);
+        funny = findViewById(R.id.checkBox_funny);
 
         initialcheckBoxesArray();
 

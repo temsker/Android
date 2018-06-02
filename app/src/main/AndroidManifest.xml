@@ -32,7 +32,8 @@
         <activity
             android:name=".EditProfileActivity"
             android:parentActivityName=".ProfileActivity" />
-        <activity android:name=".PostActivity"></activity>
+        <activity android:name=".PostActivity" />
+        <activity android:name=".PicturesActivity"></activity>
     </application>
 
 </manifest>

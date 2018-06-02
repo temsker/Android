@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public class Picture implements Serializable {
 
-    public static final int numberOfAlbums = 13;
+    public static final int numberOfAlbums = 14;
 
     private boolean albums[];
     private byte[] pictureInByteArray;
