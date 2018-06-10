@@ -7,6 +7,7 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 
@@ -22,6 +23,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void showAlbums(View view) {
 
+        Intent intent = new Intent(this, AlbumsActivity.class);
+        intent.putExtra("show_albums", "showAlbums");
+        startActivity(intent);
     }
 
 

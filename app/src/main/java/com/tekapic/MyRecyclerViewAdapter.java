@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.MyViewHolder> {
 
     Context context;
-    ArrayList<Picture> pictures = new ArrayList<Picture>();;
+    ArrayList<Picture> pictures = new ArrayList<Picture>();
 
 
     public MyRecyclerViewAdapter(ArrayList<Picture> list, Context context){
